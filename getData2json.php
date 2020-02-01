@@ -8,8 +8,8 @@ if(!isset($argv[1])){
 
 $kcAPIgetDataJsonFile = $argv[1];
 $shipJsonFile = __DIR__ . '/jsons/kcships.json';
-$portBgmJsonFile = __DIR__ . '/jsons/kcportbgm.json';
-$battleBgmJsonFile = __DIR__ . '/jsons/kcbattlebgm.json';
+$portBgmJsonFile = __DIR__ . '/jsons/kcportbgms.json';
+$battleBgmJsonFile = __DIR__ . '/jsons/kcbattlebgms.json';
 mkdir(__DIR__ . '/jsons');
 
 $getDataFile = file_get_contents($kcAPIgetDataJsonFile);
