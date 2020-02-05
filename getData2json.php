@@ -45,6 +45,7 @@ function getShipData(array $json): array{
         $result[] = [
             'id' => $ship['api_id'],
             'name' => $ship['api_name'],
+            'yomi' => $ship['api_yomi'],
             'code' => $code,
             'intro' => $intro
         ];
