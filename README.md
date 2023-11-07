@@ -1,7 +1,7 @@
 # kancolleData
 ```
-php getData2json.php /path/to/getData.json
+php getData2json.php /path/to/getData
 ```
 
 ## jsons/
-* Last updated: 2020/02/01
+* Last updated: 2023/11/08
