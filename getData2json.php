@@ -1,7 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
-if(!isset($argv[1])){
+if (!isset($argv[1])) {
     echo "Must set getData.json file.\n";
     exit(1);
 }
@@ -26,18 +27,19 @@ file_put_contents($portBgmJsonFile, json_encode($portBgms, JSON_UNESCAPED_UNICOD
 $battleBgms = getBattleBgmData($json);
 file_put_contents($battleBgmJsonFile, json_encode($battleBgms, JSON_UNESCAPED_UNICODE));
 
-function getShipData(array $json): array{
+function getShipData(array $json): array
+{
     $result = [];
-    foreach($json['api_data']['api_mst_ship'] as $ship){
+    foreach ($json['api_data']['api_mst_ship'] as $ship) {
         $intro = $ship['api_getmes'] ?? '';
-        if($intro == '<br>'){
+        if ($intro == '<br>') {
             $intro = '';
-        }else{
+        } else {
             $intro = str_replace('<br>', "\n", $intro);
         }
 
-        foreach($json['api_data']['api_mst_shipgraph'] as $shipgraph){
-            if($ship['api_id'] == $shipgraph['api_id']){
+        foreach ($json['api_data']['api_mst_shipgraph'] as $shipgraph) {
+            if ($ship['api_id'] == $shipgraph['api_id']) {
                 $code = $shipgraph['api_filename'];
             }
         }
@@ -53,9 +55,10 @@ function getShipData(array $json): array{
     return $result;
 }
 
-function getPortBgmData(array $json): array{
+function getPortBgmData(array $json): array
+{
     $result = [];
-    foreach($json['api_data']['api_mst_bgm'] as $bgm){
+    foreach ($json['api_data']['api_mst_bgm'] as $bgm) {
         $result[] = [
             'id' => $bgm['api_id'],
             'name' => $bgm['api_name']
@@ -64,9 +67,10 @@ function getPortBgmData(array $json): array{
     return $result;
 }
 
-function getBattleBgmData(array $json): array{
+function getBattleBgmData(array $json): array
+{
     $result = [];
-    foreach($json['api_data']['api_mst_mapbgm'] as $mapbgm){
+    foreach ($json['api_data']['api_mst_mapbgm'] as $mapbgm) {
         $mapNumber = $mapbgm['api_maparea_id'] . '-' . $mapbgm['api_no'];
         $result[$mapNumber] = [
             'movingBgm' => $mapbgm['api_moving_bgm'],
@@ -83,7 +87,8 @@ function getBattleBgmData(array $json): array{
     return $result;
 }
 
-function removeUtf8Bom(string $text): string{
-    $bom = pack('H*','EFBBBF');
+function removeUtf8Bom(string $text): string
+{
+    $bom = pack('H*', 'EFBBBF');
     return preg_replace("/^$bom/", '', $text);
 }
